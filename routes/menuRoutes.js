@@ -1,0 +1,10 @@
+import express from 'express';
+import { getMenuItems, createMenuItem, updateMenuItem, deleteMenuItem, toggleMenuItem, getCategories } from '../controllers/menuController.js';
+import { protect } from '../middleware/authMiddleware.js';
+const router = express.Router();
+router.use(protect);
+router.get('/categories', getCategories);
+router.route('/').get(getMenuItems).post(createMenuItem);
+router.route('/:id').put(updateMenuItem).delete(deleteMenuItem);
+router.patch('/:id/toggle', toggleMenuItem);
+export default router;

@@ -1,0 +1,10 @@
+import express from 'express';
+import { getOrders, createOrder, getOrder, updateOrder, updateStatus, deleteOrder, duplicateOrder } from '../controllers/orderController.js';
+import { protect } from '../middleware/authMiddleware.js';
+const router = express.Router();
+router.use(protect);
+router.route('/').get(getOrders).post(createOrder);
+router.route('/:id').get(getOrder).put(updateOrder).delete(deleteOrder);
+router.patch('/:id/status', updateStatus);
+router.post('/:id/duplicate', duplicateOrder);
+export default router;
